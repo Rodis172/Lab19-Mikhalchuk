@@ -92,3 +92,25 @@ int CountWords(string text)
     string[] words = text.Split(' ', StringSplitOptions.RemoveEmptyEntries);
     return words.Length;
 }
+
+
+
+
+// // вариант 3
+
+int CountWordsManually(string text)
+{
+    int count = 0;
+
+    for (int i = 0; i < text.Length; i++)
+    {
+        if (text[i] != ' ' && (i == 0 || text[i - 1] == ' '))
+        {
+            count++;
+        }
+    }
+
+    return count;
+}
+
+Console.WriteLine($"Слов (без Split): {CountWordsManually(text)}");
