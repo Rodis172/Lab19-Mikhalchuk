@@ -1,17 +1,33 @@
-﻿Console.WriteLine(CountCharacter("мама", 'м'));
-Console.WriteLine(CountCharacter("Код 2026", ' '));
-Console.WriteLine(CountCharacter("", 'а'));
+﻿Console.Write("Введите строку: ");
+string text = Console.ReadLine() ?? "";
 
-Console.WriteLine(CountDigits("Код 2026!"));
-Console.WriteLine(CountLetters("Код 2026!"));
+Console.WriteLine();
+Console.WriteLine(">>> Анализ строки <<<");
+Console.WriteLine();
+Console.WriteLine($"Исходная строка: [{text}]");
+Console.WriteLine($"Длина: {text.Length}");
+Console.WriteLine($"Букв: {CountLetters(text)}");
+Console.WriteLine($"Цифр: {CountDigits(text)}");
+Console.WriteLine($"Пробелов: {CountCharacter(text, ' ')}");
+Console.WriteLine($"Слов: {CountWords(text)}");
+Console.WriteLine($"Без пробелов по краям: [{text.Trim()}]");
+Console.WriteLine($"Верхний регистр: [{text.ToUpper()}]");
+Console.WriteLine($"Замена пробелов: [{text.Replace(' ', '_')}]");
 
-Console.WriteLine(CountDigits("A2B3"));
+Console.WriteLine();
+Console.Write("Введите один символ для поиска: ");
+char target = Convert.ToChar(Console.ReadLine());
 
+int index = FindCharacterIndex(text, target);
 
-Console.WriteLine(FindCharacterIndex("banana", 'a'));
-Console.WriteLine(FindCharacterIndex("banana", 'b'));
-Console.WriteLine(FindCharacterIndex("banana", 'z'));
-Console.WriteLine(FindCharacterIndex("", 'a'));
+if (index == -1)
+{
+    Console.WriteLine("Символ не найден");
+}
+else
+{
+    Console.WriteLine($"Первый индекс: {index}");
+}
 
 int CountCharacter(string text, char target)
 {
@@ -69,4 +85,10 @@ int FindCharacterIndex(string text, char target)
     }
 
     return -1;
+}
+
+int CountWords(string text)
+{
+    string[] words = text.Split(' ', StringSplitOptions.RemoveEmptyEntries);
+    return words.Length;
 }
